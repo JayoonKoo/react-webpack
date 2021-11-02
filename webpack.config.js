@@ -1,7 +1,7 @@
-const path = require("path");
-const HtmlPlugin = require('html-webpack-plugin');
-const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-// process.env.NODE_ENV = 'production';
+const path = require('path')
+const HtmlPlugin = require('html-webpack-plugin')
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
 	mode: 'development',
@@ -29,6 +29,7 @@ module.exports = {
 				use: [
 					'style-loader',
 					'css-loader',
+					'postcss-loader',
 					'sass-loader'
 				]
 			}
@@ -49,6 +50,11 @@ module.exports = {
 		new HtmlPlugin({
 			template: './index.html'
 		}),
+		new CopyPlugin({
+			patterns: [
+				{from: 'static'}
+			]
+		})
 	],
 
 	devServer: {
